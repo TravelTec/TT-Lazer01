@@ -130,7 +130,7 @@ class Main {
 		$menu_name = sprintf( __( '%s Options', 'neve' ), wp_kses_post( $theme['name'] ) );
 
 		$theme_page = ! empty( $theme['template'] ) ? $theme['template'] . '-welcome' : $theme['slug'] . '-welcome';
-		add_theme_page( $page_title, $menu_name, 'activate_plugins', $theme_page, [ $this, 'render' ] );
+		//add_theme_page( $page_title, $menu_name, 'activate_plugins', $theme_page, [ $this, 'render' ] );
 	}
 
 	/**
@@ -233,8 +233,7 @@ class Main {
 			'onboarding'              => [],
 			'hasFileSystem'           => WP_Filesystem(),
 			'hidePluginsTab'          => apply_filters( 'neve_hide_useful_plugins', ! array_key_exists( 'useful_plugins', $old_about_config ) ),
-			'tpcPath'                 => defined( 'TIOB_PATH' ) ? TIOB_PATH . 'template-patterns-collection.php' : 'template-patterns-collection/template-patterns-collection.php',
-			'tpcAdminURL'             => admin_url( 'themes.php?page=tiob-starter-sites' ),
+			'tpcPath'                 => defined( 'TIOB_PATH' ) ? TIOB_PATH . 'template-patterns-collection.php' : 'template-patterns-collection/template-patterns-collection.php', 
 			'pluginsURL'              => esc_url( admin_url( 'plugins.php' ) ),
 			'getPluginStateBaseURL'   => esc_url( rest_url( '/nv/v1/dashboard/plugin-state/' ) ),
 		];
