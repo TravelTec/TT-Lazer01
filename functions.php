@@ -2,18 +2,39 @@
 /**
  * Neve functions.php file
  *
- * Author:          Andrei Baicus <andrei@themeisle.com>
- * Created on:      17/08/2018
+ * Author:          Travel Tec sac@traveltec.com.br
+ * Created on:      10/04/2023
  *
  * @package Neve
  */
 
-define( 'NEVE_VERSION', '3.5.6' );
+define( 'NEVE_VERSION', '1.0.0' );
 define( 'NEVE_INC_DIR', trailingslashit( get_template_directory() ) . 'inc/' );
 define( 'NEVE_ASSETS_URL', trailingslashit( get_template_directory_uri() ) . 'assets/' );
 define( 'NEVE_MAIN_DIR', get_template_directory() . '/' );
 define( 'NEVE_BASENAME', basename( NEVE_MAIN_DIR ) );
-define( 'NEVE_PLUGINS_DIR', plugin_dir_path( dirname( __DIR__ ) ) . 'plugins/' );
+define( 'NEVE_PLUGINS_DIR', plugin_dir_path( dirname( __DIR__ ) ) . 'plugins/' ); 
+
+
+require 'plugin-update-checker-4.10/plugin-update-checker.php';
+
+add_action( 'admin_init', 'ttlazer_update_checker_setting' );  
+
+function ttlazer_update_checker_setting() { 
+
+    if ( ! is_admin() || ! class_exists( 'Puc_v4_Factory' ) ) {  
+        return;  
+    }  
+
+    $myUpdateChecker = Puc_v4_Factory::buildUpdateChecker( 
+        'https://github.com/TravelTec/TT-Lazer01',  
+        __FILE__,  
+        'ttlazer'  
+    );  
+
+    $myUpdateChecker->setBranch('main'); 
+
+}
 
 if ( ! defined( 'NEVE_DEBUG' ) ) {
 	define( 'NEVE_DEBUG', false );
